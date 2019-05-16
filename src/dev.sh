@@ -17,7 +17,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$SCRIPT_DIR/.helpers.sh"
 
 DOTNETSDK_ROOT="$SCRIPT_DIR/../_dotnetsdk"
-DOTNETSDK_VERSION="2.1.403"
+DOTNETSDK_VERSION="3.0.101"
 DOTNETSDK_INSTALLDIR="$DOTNETSDK_ROOT/$DOTNETSDK_VERSION"
 AGENT_VERSION=$(cat "$SCRIPT_DIR/agentversion")
 
@@ -48,7 +48,7 @@ function detect_platform_and_runtime_id ()
             local CPU_NAME=$(uname -m)
             case $CPU_NAME in
                 armv7l) DETECTED_RUNTIME_ID="linux-arm";;
-                aarch64) DETECTED_RUNTIME_ID="linux-arm";;
+                aarch64) DETECTED_RUNTIME_ID="linux-arm64";;
             esac
         fi
     
@@ -157,7 +157,7 @@ else
     RUNTIME_ID=$DETECTED_RUNTIME_ID
 fi
 
-_VALID_RIDS='linux-x64:linux-arm:rhel.6-x64:osx-x64:win-x64:win-x86'
+_VALID_RIDS='linux-x64:linux-arm:linux-arm64:rhel.6-x64:osx-x64:win-x64:win-x86'
 if [[ ":$_VALID_RIDS:" != *:$RUNTIME_ID:* ]]; then
     failed "must specify a valid target runtime ID (one of: $_VALID_RIDS)"
 fi
