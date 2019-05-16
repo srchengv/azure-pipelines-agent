@@ -16,7 +16,7 @@ LAYOUT_DIR="$SCRIPT_DIR/../_layout"
 DOWNLOAD_DIR="$SCRIPT_DIR/../_downloads/netcore2x"
 PACKAGE_DIR="$SCRIPT_DIR/../_package"
 DOTNETSDK_ROOT="$SCRIPT_DIR/../_dotnetsdk"
-DOTNETSDK_VERSION="2.1.403"
+DOTNETSDK_VERSION="3.0.100"
 DOTNETSDK_INSTALLDIR="$DOTNETSDK_ROOT/$DOTNETSDK_VERSION"
 AGENT_VERSION=$(cat agentversion)
 
@@ -43,7 +43,7 @@ elif [[ "$CURRENT_PLATFORM" == 'linux' ]]; then
       CPU_NAME=$(uname -m)
       case $CPU_NAME in
          armv7l) RUNTIME_ID="linux-arm";;
-         aarch64) RUNTIME_ID="linux-arm";;
+         aarch64) RUNTIME_ID="linux-arm64";;
       esac
    fi
    
@@ -68,7 +68,7 @@ if [[ "$CURRENT_PLATFORM" == 'windows' ]]; then
       exit 1
    fi
 elif [[ "$CURRENT_PLATFORM" == 'linux' ]]; then
-   if [[ ("$RUNTIME_ID" != 'linux-x64') && ("$RUNTIME_ID" != 'linux-arm') && ("$RUNTIME_ID" != 'rhel.6-x64') ]]; then
+   if [[ ("$RUNTIME_ID" != 'linux-x64') && ("$RUNTIME_ID" != 'linux-arm') && ("$RUNTIME_ID" != 'linux-arm64') && ("$RUNTIME_ID" != 'rhel.6-x64') ]]; then
       echo "Failed: Can't build $RUNTIME_ID package $CURRENT_PLATFORM" >&2
       exit 1
    fi
