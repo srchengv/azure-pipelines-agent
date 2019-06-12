@@ -124,6 +124,14 @@ namespace Agent.Plugins.Repository
                 context.Output(StringUtil.Loc("UpgradeToLatestGit", recommendGitVersion, gitVersion));
             }
 
+            // git-lfs 2.7.1 contains a bug where it doesn't include extra header from git config
+            // See https://github.com/git-lfs/git-lfs/issues/3571
+            Version recommendedGitLfsVersion = new Version(2, 7, 2);
+            if (gitLfsVersion == new Version(2, 7, 1))
+            {
+                context.Output(StringUtil.Loc("UnsupportedGitLfsVersion", gitLfsVersion, recommendedGitLfsVersion));
+            }
+
             // Set the user agent.
             string gitHttpUserAgentEnv = $"git/{gitVersion.ToString()} (vsts-agent-git/{context.Variables.GetValueOrDefault("agent.version")?.Value ?? "unknown"})";
             context.Debug($"Set git useragent to: {gitHttpUserAgentEnv}.");
