@@ -10,6 +10,7 @@ using System.IO;
 using Agent.Sdk;
 using Microsoft.VisualStudio.Services.Agent.Util;
 using Microsoft.VisualStudio.Services.Common;
+using Pipelines = Microsoft.TeamFoundation.DistributedTask.Pipelines;
 
 namespace Agent.Plugins.Repository
 {
@@ -126,8 +127,10 @@ namespace Agent.Plugins.Repository
 
             // git-lfs 2.7.1 contains a bug where it doesn't include extra header from git config
             // See https://github.com/git-lfs/git-lfs/issues/3571
+            bool gitLfsSupport = StringUtil.ConvertToBoolean(context.GetInput(Pipelines.PipelineConstants.CheckoutTaskInputs.Lfs));
             Version recommendedGitLfsVersion = new Version(2, 7, 2);
-            if (gitLfsVersion == new Version(2, 7, 1))
+            
+            if (gitLfsSupport && gitLfsVersion == new Version(2, 7, 1))
             {
                 context.Output(StringUtil.Loc("UnsupportedGitLfsVersion", gitLfsVersion, recommendedGitLfsVersion));
             }
