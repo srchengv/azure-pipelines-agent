@@ -430,7 +430,28 @@ namespace Microsoft.VisualStudio.Services.Agent.Worker.Release
                 Version = agentArtifactDefinition.Version
             };
 
-            artifactDefinition.Details = extension.GetArtifactDetails(executionContext, agentArtifactDefinition);
+            RetryExecutor retryExecutor = new RetryExecutor();
+                retryExecutor.ShouldRetryAction = (ex) =>
+                {
+                    bool retry = true;
+                    if (ex is InvalidOperationException)
+                    {
+                        retry = false;
+                    }
+                    else
+                    {
+                        Trace.Warning(ex.ToString());
+                    }
+
+                    return retry;
+                };
+
+            retryExecutor.Execute(
+                () =>
+                {
+                    artifactDefinition.Details = extension.GetArtifactDetails(executionContext, agentArtifactDefinition);
+                });
+
             return artifactDefinition;
         }
 
