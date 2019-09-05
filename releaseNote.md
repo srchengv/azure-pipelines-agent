@@ -1,13 +1,15 @@
 ## Features
-  - Using TCM TestResultsHttpClient in the agent command to publish test results. (#2371)
-  - Adding tarring support for Pipeline Cache (#2369) 
-  
+  - Adding UNC path feature to Pipeline Artifact Task + Adding DPA V2 task Telemetry (#2406)
+  - Updated to support Xamarin detection with VS2019 (#2418)
+  - Adding DownloadFromWhichBuild information to DPA V1 and V2 (#2405)
+
 ## Bugs
-  - Updated to support windows-style paths for container volume mounting (#2391)
-  - Improve logging around cache key/fingerprint calculation (#2375)
+  - Modifying the process working directory location for tarring (#2411)
 
 ## Misc
-  - Adding some parameters in start monitor to be passed to process telemetry (#2377)
+  - Updated to include task version in message to download (#2409)
+  - Updated to print to console a message if an error was sent to trace log (#2408)
+  - Telemetry addition in PublishTestResults (#2414)
 
 ## Agent Downloads  
 
