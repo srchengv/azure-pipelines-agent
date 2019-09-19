@@ -289,6 +289,8 @@ namespace Microsoft.VisualStudio.Services.Agent
             public static readonly string MacroPrefix = "$(";
             public static readonly string MacroSuffix = ")";
 
+            public static readonly string ImageVersion = "ImageVersion";
+
             public static class Agent
             {
                 //
