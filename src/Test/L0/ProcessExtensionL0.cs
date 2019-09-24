@@ -52,6 +52,10 @@ namespace Microsoft.VisualStudio.Services.Agent.Tests
                             trace.Info($"Find the env.");
                             return;
                         }
+                        else
+                        {
+                            Assert.True(false, "Expected environment '" + envValue + "' did not match actual '" + value + "'");
+                        }
                     }
                     catch (Exception ex)
                     {
